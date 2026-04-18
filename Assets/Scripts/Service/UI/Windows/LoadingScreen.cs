@@ -7,7 +7,7 @@ namespace Service.UI.Windows
     {
         protected override Type WindowType => typeof(LoadingScreen);
         
-        private UIService UIService => Services.GetSerivce<UIService>();
+        private UIService UIService => Services.GetService<UIService>();
 
         protected override void OnHide()
         {

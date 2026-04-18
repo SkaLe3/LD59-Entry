@@ -41,7 +41,7 @@ namespace Service
 #endif
         }
 
-        public static T GetSerivce<T>() where T : BaseService
+        public static T GetService<T>() where T : BaseService
         {
             return (T)_servicesMap[typeof(T)];
         }

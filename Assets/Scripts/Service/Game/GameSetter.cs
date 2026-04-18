@@ -5,7 +5,7 @@ namespace Service.Game
 {
     public static class GameSetter
     {
-        private static UIService UIService => Services.GetSerivce<UIService>();
+        private static UIService UIService => Services.GetService<UIService>();
 
         public static void SetGame()
         {

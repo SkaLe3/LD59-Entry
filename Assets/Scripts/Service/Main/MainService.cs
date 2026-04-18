@@ -10,7 +10,7 @@ namespace Service.Main
     {
         public override Type ServiceType => typeof(MainService);
 
-        private GameService GameService => Services.GetSerivce<GameService>();
+        private GameService GameService => Services.GetService<GameService>();
 
         protected override async Task<bool> OnInit()
         {

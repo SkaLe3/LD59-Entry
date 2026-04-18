@@ -14,7 +14,7 @@ namespace Service.UI.Windows
         public abstract SubWindowType Type { get; }
         public Type parentType;
         
-        protected BaseWindow MainWindow => Services.GetSerivce<UIService>().GetWindow(parentType);
+        protected BaseWindow MainWindow => Services.GetService<UIService>().GetWindow(parentType);
 
         public void Show()
         {
@@ -29,7 +29,7 @@ namespace Service.UI.Windows
 
         public void CloseByParent()
         {
-            Services.GetSerivce<UIService>().GetWindow(parentType).CloseAllSubWindows();
+            Services.GetService<UIService>().GetWindow(parentType).CloseAllSubWindows();
         }
 
         public void Hide()

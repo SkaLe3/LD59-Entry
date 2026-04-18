@@ -7,7 +7,6 @@ namespace Service.Audio
     public class SoundCuePlayer : ISoundCuePlayer
     {
         private readonly AudioSource _audioSource;
-        private RandomService RandomService = Services.GetSerivce<RandomService>();
 
         public SoundCuePlayer(AudioSource audioSource)
         {
@@ -16,7 +15,7 @@ namespace Service.Audio
 
         public void PlaySoundCue(SoundCue array, float pitchMultiplier = 1)
         {
-            int index = RandomService.Range(0, array.clips.Length);
+            int index = Services.GetService<RandomService>().Range(0, array.clips.Length);
             AudioClip clip = array.clips[index];
 
             float originalPitch = _audioSource.pitch;

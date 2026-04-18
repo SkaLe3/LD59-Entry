@@ -14,8 +14,6 @@ namespace Service.Audio
         private readonly Queue<SpatialAudioSourceWrapper> _availablePool;
         private readonly List<SpatialAudioSourceWrapper> _activeWrappers;
         
-        private RandomService RandomService = Services.GetSerivce<RandomService>();
-        
         private const int INITIAL_POOL_SIZE = 10;
         private const int MAX_POOL_SIZE = 50;
 
@@ -42,7 +40,7 @@ namespace Service.Audio
                 return;
             }
 
-            int index = RandomService.Range(0, cue.clips.Length);
+            int index = Services.GetService<RandomService>().Range(0, cue.clips.Length);
             AudioClip clip = cue.clips[index];
 
             if (clip == null)

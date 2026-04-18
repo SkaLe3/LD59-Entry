@@ -11,6 +11,7 @@ namespace Service.UI.Windows
         [Header("SubViews")]
         [SerializeField] private Transform _subViewsParent;
         public List<SubWindow> subWindows;
+        public HUD gameHUD;
 
         private bool _initialized = false;
 

@@ -28,7 +28,14 @@ namespace Core.Player
 
         [Header("References")] [SerializeField]
         private Rigidbody rb;
-
+        
+        [Header("Wheel Visuals")]
+        [SerializeField] private GameObject[] frontWheelMeshes;
+        [SerializeField] private GameObject[] backWheelMeshes;
+        [SerializeField] private float wheelRadius = 0.3f;
+        [SerializeField] private float maxSteerAngle = 30f;
+        
+        
         [SerializeField] private AudioSource engineSoundSource;
         [SerializeField] private AudioSource skidClip;
         [SerializeField] private AudioClip[] impactSounds;
@@ -51,6 +58,8 @@ namespace Core.Player
         private bool tireEffectsFlag;
         private bool isGrounded;
         private Vector3 groundNormal = Vector3.up;
+        
+        private float wheelRotationAngle;
 
         public event Action OnCrashed;
 
@@ -202,6 +211,8 @@ namespace Core.Player
                 isGrounded = false;
                 groundNormal = Vector3.up;
             }
+
+            isGrounded = true;
         }
 
         private void UpdateEngineSound()
@@ -215,6 +226,7 @@ namespace Core.Player
         {
             UpdateTilt();
             UpdateSkidMarks();
+            UpdateWheelVisuals();
         }
 
         private void UpdateTilt()
@@ -315,6 +327,30 @@ namespace Core.Player
             }
 
             tireEffectsFlag = false;
+        }
+        
+        private void UpdateWheelVisuals()
+        {
+            // 1. Calculate how much the wheel should have rotated based on speed
+            // We use the dot product to ensure wheels spin backward when reversing
+            float speed = Vector3.Dot(rb.linearVelocity, transform.forward);
+    
+            // Formula: Distance / Circumference * 360 degrees
+            float rotationAmount = (speed * Time.deltaTime) / (2 * Mathf.PI * wheelRadius) * 360f;
+            wheelRotationAngle += rotationAmount;
+
+            // 2. Rotate Front Wheels (Spin + Steer)
+            foreach (var wheel in frontWheelMeshes)
+            {
+                // Local rotation: X is rolling, Y is steering
+                wheel.transform.localRotation = Quaternion.Euler(0, steeringInput * maxSteerAngle, -wheelRotationAngle);
+            }
+
+            // 3. Rotate Back Wheels (Spin only)
+            foreach (var wheel in backWheelMeshes)
+            {
+                wheel.transform.localRotation = Quaternion.Euler(0, 0, -wheelRotationAngle);
+            }
         }
     }
 }

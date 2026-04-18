@@ -6,11 +6,11 @@ namespace Service.UI
     public abstract class BaseClosableWindow : BaseWindow
     {
         protected abstract Type WindowType { get; }
-        protected UIService UIService => Services.GetSerivce<UIService>();
+        protected UIService UIService => Services.GetService<UIService>();
         
         public void HideWindow()
         {
-            Services.GetSerivce<UIService>().HideWindow(WindowType);
+            Services.GetService<UIService>().HideWindow(WindowType);
         }
     }
 }

@@ -48,7 +48,7 @@ namespace Boot
                 yield break;
             }
 
-            var mainService = Service.Services.GetSerivce<MainService>();
+            var mainService = Service.Services.GetService<MainService>();
             SceneLoader.LoadScene(bootSetting.NextSceneIndex, () => mainService.EntryPoint());
         }
         #endregion

@@ -11,7 +11,7 @@ namespace Service.Audio
         private readonly Queue<AudioClip> _queue;
         private List<AudioClip> _playlist;
 
-        private RandomService RandomService = Services.GetSerivce<RandomService>();
+        //private RandomService RandomService = Services.GetSerivce<RandomService>();
         
         public TrackProvider()
         {
@@ -39,11 +39,11 @@ namespace Service.Audio
 
         private void Reshuffle()
         {
-            RandomService.Shuffle(_playlist);
+            Services.GetService<RandomService>().Shuffle(_playlist);
 
             if (_queue.Count > 0 && _playlist.Count > 1 && _playlist[0] == _queue.Last())
             {
-                int swapIndex = RandomService.Range(1, _playlist.Count);
+                int swapIndex = Services.GetService<RandomService>().Range(1, _playlist.Count);
                 AudioClip temp = _playlist[swapIndex];
                 _playlist[swapIndex] = _playlist[0];
                 _playlist[0] = temp;
