@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 968040be70e24c23b0afb743589bf059, type: 3}
+  m_Name: BootSettings
+  m_EditorClassIdentifier: Assembly-CSharp::Boot.BootSettings
+  bootTime: 1
+  nextSceneIndex: 1
+  services:
+  - {fileID: 653436198776319427, guid: f2dc9731941a54b4089360c8a0ba993d, type: 3}
+  - {fileID: 2920425734924792695, guid: 521f7ae042111024c87b1b42a0e07ce1, type: 3}
+  - {fileID: 7877868232857113965, guid: abce930e41104194eae859139d7c8cc3, type: 3}
+  - {fileID: 541495917360063331, guid: ba1e7225cc829274f89764a6e0a25fc4, type: 3}
+  - {fileID: 721120258255276321, guid: b30a9c5d54b03a74dae509f644a9b318, type: 3}
