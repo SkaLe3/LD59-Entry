@@ -141,9 +141,16 @@ MonoBehaviour:
   signalEmitter: {fileID: 1850441713212158682}
   signalParticles: {fileID: 5397659419244827146}
   overshootDistance: 0.7
+  signalMinRadius: 3
+  signalMaxRadius: 15
   signalReachSpeed: 2.5
-  signalRadius: 3
   signalLoseDistance: 4
+  signalLoseCurveOverFarArea:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!135 &4751343603701295027
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -227,15 +234,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4237148535601500722, guid: 99f2b789237f24eb2b2c1345c96be265, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.026455028
+      value: 0.016896613
       objectReference: {fileID: 0}
     - target: {fileID: 4237148535601500722, guid: 99f2b789237f24eb2b2c1345c96be265, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.026455037
+      value: 0.016896613
       objectReference: {fileID: 0}
     - target: {fileID: 4237148535601500722, guid: 99f2b789237f24eb2b2c1345c96be265, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.026455037
+      value: 0.016896613
       objectReference: {fileID: 0}
     - target: {fileID: 4237148535601500722, guid: 99f2b789237f24eb2b2c1345c96be265, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,13 +1,17 @@
 ﻿using System;
+using Tools;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 namespace Service.UI.Windows
 {
     public class MainMenu : BaseClosableWindow
     {
         protected override Type WindowType => typeof(MainMenu);
+
+        [SerializeField] private GameObject briefingMenu;
         
         private UIService UIService => Services.GetService<UIService>();
 
@@ -18,15 +22,19 @@ namespace Service.UI.Windows
 
         protected override void OnShow()
         {
-            
+            briefingMenu.SetActive(false);
         }
 
         public void Play()
         {
             HideWindow();
 
-            UIService.ShowWindow<MainWindow>();
-            // Start gameplay music
+            SceneLoader.LoadScene(2, () => { UIService.ShowWindow<MainWindow>();});
+        }
+
+        public void Briefing()
+        {
+            briefingMenu.SetActive(!briefingMenu.activeInHierarchy);
         }
 
         public void ExitGame()

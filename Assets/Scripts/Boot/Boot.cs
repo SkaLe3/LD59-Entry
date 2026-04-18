@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Service;
 using Service.Main;
+using Service.UI;
+using Service.UI.Windows;
 using Tools;
 using UnityEditor.Build.Content;
 using UnityEngine;
@@ -41,6 +43,7 @@ namespace Boot
 
         private IEnumerator Loading()
         {
+            Service.Services.GetService<UIService>().ShowWindow<LoadingScreen>();
             yield return new WaitForSeconds(bootSetting.BootTime);
             if (bootSetting.NextSceneIndex == 0)
             {

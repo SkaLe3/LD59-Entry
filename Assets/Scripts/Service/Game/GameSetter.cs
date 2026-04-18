@@ -10,6 +10,7 @@ namespace Service.Game
         public static void SetGame()
         {
             UIService.HideWindow<LoadingScreen>();
+            UIService.HideWindow<MainWindow>();
             UIService.ShowWindow<MainMenu>();
         }
     }

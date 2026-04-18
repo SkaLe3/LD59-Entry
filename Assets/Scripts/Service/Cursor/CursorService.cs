@@ -21,17 +21,25 @@ namespace Services.Cursor
         [SerializeField] private InputActionReference clickAction;
         protected override async Task<bool> OnInit()
         {
-            clickAction.action.started += OnClickStarted;
+            clickAction.action.performed += OnClickStarted;
             clickAction.action.canceled += OnClickCanceled;
             clickAction.action.Enable();
-            
+            clickAction.action.actionMap.Enable();
+ 
             SetCursor(CursorType.Default);
             return true;
         }
         
         private void OnClickStarted(InputAction.CallbackContext context)
         {
-            SetCursor(CursorType.Hold);
+            if (context.ReadValue<float>() > 0.5f)
+            {
+                SetCursor(CursorType.Hold);
+            }
+            else
+            {
+                SetCursor(CursorType.Default);
+            }
         }
 
         private void OnClickCanceled(InputAction.CallbackContext context)
@@ -56,7 +64,7 @@ namespace Services.Cursor
         {
             if (clickAction == null) return;
             
-            clickAction.action.started -= OnClickStarted;
+            clickAction.action.performed -= OnClickStarted;
             clickAction.action.canceled -= OnClickCanceled;
         }
     }
