@@ -259,7 +259,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -463,7 +463,6 @@ GameObject:
   - component: {fileID: 315929931713042587}
   - component: {fileID: 326054398974516732}
   - component: {fileID: 244823098049246776}
-  - component: {fileID: 6244846746701670676}
   m_Layer: 0
   m_Name: Wheel_RL
   m_TagString: Untagged
@@ -543,27 +542,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &6244846746701670676
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 858731029865635756}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.0049976325
-  m_Center: {x: 0.000000007450581, y: 0.000000003259629, z: 0.00024294149}
 --- !u!1 &1160721230089079186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1446,7 +1424,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1716,7 +1694,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -1735,7 +1713,6 @@ GameObject:
   - component: {fileID: 3220816388809812008}
   - component: {fileID: 4307812081745611775}
   - component: {fileID: 181787613126851598}
-  - component: {fileID: 2857368538058033429}
   m_Layer: 0
   m_Name: Wheel_RR
   m_TagString: Untagged
@@ -1815,27 +1792,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &2857368538058033429
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4016433643910081960}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.004997632
-  m_Center: {x: 0.000000006286427, y: 0.000000003259629, z: -0.00024294149}
 --- !u!1 &4223321799038014222
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,7 +1838,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -2691,7 +2647,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -2896,7 +2852,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -3008,11 +2964,11 @@ MonoBehaviour:
   maxSpeed: 18
   maxTraction: 1
   idleTraction: 10
-  turnSpeed: 240
+  turnSpeed: 220
   driftThreshold: 0.1
-  forwardTiltAmount: 5.5
-  springStiffness: 280
-  damperCoefficient: 15
+  forwardTiltAmount: 6.5
+  springStiffness: 300
+  damperCoefficient: 13
   sidewaysTiltAmount: 20
   minSideSkidVelocity: 2
   steeringCurve:
@@ -3028,8 +2984,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.20062633
-      value: 0.9989338
+      time: 0.37285227
+      value: 0.9973469
       inSlope: -0.10963625
       outSlope: -0.10963625
       tangentMode: 0

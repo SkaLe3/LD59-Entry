@@ -27,9 +27,10 @@ namespace Core.Player
         private RadioTower _interactionTower;
         private InputAction interact;
         private InputAction shutdown;
-
-        private bool _isConnected;
+        
         private IRadioInterface _connectedTower;
+
+        private bool gameEnded;
         
         #region Unity lifecycle
         
@@ -60,6 +61,9 @@ namespace Core.Player
         {
             vehicleMovement = GetComponent<VehicleMovement>();
             playerHUD = Service.Services.GetService<UIService>().GetWindow<MainWindow>().gameHUD;
+
+            NetworkManager manager = FindAnyObjectByType<NetworkManager>();
+            manager.OnNetworkConnected += OnNetworkConnected;
         }
         
         private void Update()
@@ -72,6 +76,8 @@ namespace Core.Player
         
         public void OnMove(InputValue value)
         {
+            if (gameEnded) return;
+            
             _inputVector = value.Get<Vector2>();
         }
 
@@ -91,18 +97,27 @@ namespace Core.Player
             playerHUD.SetSignalStrength(strength);
         }
 
-        public void NotifyConnectionAquired(IRadioInterface from)
+        public void NotifyConnectionEstablished(IRadioInterface from)
         {
-            _isConnected = true;
             _connectedTower = from;
         }
 
         public void NotifyConnectionLost()
         {
+            _connectedTower = null;
             playerHUD.SetSignalStrength(0);
-            _isConnected = false;
         }
 
+        public bool IsConnected()
+        {
+            return _connectedTower != null;
+        }
+
+        public IRadioInterface GetSource()
+        {
+            return _connectedTower;
+        }
+        
         public bool IsAvailableAsReceiver()
         {
             return false;
@@ -128,7 +143,11 @@ namespace Core.Player
             
         }
 
-        public void StartConnectionRequest(bool connect, RadioTower tower)
+        public void SetInteractionTower(RadioTower tower)
+        {
+            _interactionTower = tower;
+        }
+        public void StartConnectionRequest(bool connect)
         {
             if (connect)
             { 
@@ -138,8 +157,6 @@ namespace Core.Player
             {
                 _waitingForDisconnect = true;
             }
-
-            _interactionTower = tower;
         }
 
         public void EndConnectionRequest()
@@ -149,9 +166,8 @@ namespace Core.Player
             _interactionTower = null;
         }
 
-        public void AllowTowerShutdown(RadioTower shutdownTower)
+        public void AllowTowerShutdown()
         {
-            _interactionTower = shutdownTower;
             _shutdownAllowed = true;
         }
 
@@ -162,10 +178,28 @@ namespace Core.Player
 
         public void OnInteract(InputAction.CallbackContext context)
         {
+            if (_interactionTower == null) return;
+            
             RadioTower myTower = _connectedTower as RadioTower;
-            if (_isConnected &&  myTower != _interactionTower)
+            if (myTower && myTower != _interactionTower)
             {
-                myTower.Disconnect();
+                myTower.Disconnect(this);
+                
+                if (myTower.IsHubTower() && !_interactionTower.IsHubTower()) // this is hub and connects to not hub
+                {
+                    RadioTower sourceTower = myTower.SignalSource as RadioTower;
+                    RadioTower targetTower = myTower;
+
+                    while (sourceTower.IsHubTower())
+                    {
+                        sourceTower.Disconnect(targetTower);
+                        targetTower = sourceTower;
+                        sourceTower = targetTower.SignalSource as RadioTower;
+                    }
+                    sourceTower.Disconnect(targetTower);
+                    sourceTower.Connect(_interactionTower);
+                    return;
+                }
                 
                 myTower.Connect(_interactionTower);
                 return;
@@ -178,8 +212,11 @@ namespace Core.Player
 
             if (_waitingForDisconnect)
             {
-                _interactionTower.Disconnect();
+                _interactionTower.Disconnect(this);
             }
+            SetInteractionTower(null);
+            EndConnectionRequest();
+            DisallowTowerShutdown();
         }
 
         public void OnShutdown(InputAction.CallbackContext context)
@@ -188,6 +225,11 @@ namespace Core.Player
             {
                 _interactionTower.Shutdown();
             }
+        }
+
+        public void OnNetworkConnected()
+        {
+            gameEnded = true;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Service.Random;
 using Service.UI;
 using Service.UI.Windows;
@@ -13,39 +14,66 @@ namespace Core.Radio
 
          private HUD _gameHUD;
          private RandomService _randomService;
+
+         private bool networkConnected = false;
+
+         public Action OnNetworkConnected;
+
+         public int connectionsLost;
+
+         private float timeElapsed;
+         
          private void Start()
          {
              _gameHUD = Service.Services.GetService<UIService>().GetWindow<MainWindow>().gameHUD;
              _randomService = Service.Services.GetService<RandomService>();
 
-             for (int i = 0; i < _bigTowers.Count; i++)
-             {
-                 _bigTowers[i].SetType(ETowerType.Receiver);
-             }
-             
-             int emitterIndex = _randomService.Range(0, _hubTowers.Count);
-             _bigTowers[emitterIndex].SetType(ETowerType.Emitter);
+             int emitterIndex = _randomService.Range(0, _bigTowers.Count);
+             _bigTowers[emitterIndex].isSignalOrigin = true;
          }
          
          private void Update()
          {
+             timeElapsed += Time.deltaTime;
+             
+             if (networkConnected) return;
+             
+             bool allTowersConnected = true;
              foreach (var tower in _bigTowers)
              {
-                 if (tower.IsAvailableAsReceiver() || tower.IsAvailableAsEmitter())
-                 {
-                     _gameHUD.AddTowerMarker(tower);
-                 }
+                 _gameHUD.AddTowerMarker(tower);
+                 allTowersConnected &= tower.IsAvailableAsEmitter;
              }
 
              foreach (var tower in _hubTowers)
              {
-                 if (tower.IsAvailableAsEmitter())
+                 if (tower.IsAvailableAsEmitter)
                  {
                      _gameHUD.AddTowerMarker(tower);
                  }
+                 else
+                 {
+                     _gameHUD.RemoveTowerMarker(tower);
+                 }
+             }
+
+             if (allTowersConnected)
+             {
+                 networkConnected = true;
+                 OnNetworkConnected?.Invoke();
+                 EndGame();
              }
          }
-         
+
+         public void NotifyConnectionLost()
+         {
+             connectionsLost++;
+         }
+
+         private void EndGame()
+         {
+             _gameHUD.ShowGameOverScreen(timeElapsed, connectionsLost);
+         }
         
     }
 }
