@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4397457723539382124}
   - component: {fileID: 4751343603701295027}
   m_Layer: 0
-  m_Name: RadioTower
+  m_Name: Tower2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179,13 +179,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  readySignalMesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-  normalSignalMesh: {fileID: -1988506878685917397, guid: 38e179e98500840db80a60459062e2df, type: 3}
-  normalStartSpeed: 10
-  readyStartSpeed: 0
-  normalStartSize: 0.3
-  readyStartSize: 1
-  readyStartLifetime: 0.6
 --- !u!135 &4751343603701295027
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -218,7 +211,7 @@ PrefabInstance:
     - target: {fileID: 1876500096520856844, guid: 99f2b789237f24eb2b2c1345c96be265, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -1988506878685917397, guid: 38e179e98500840db80a60459062e2df, type: 3}
+      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 1945871885581760763, guid: 99f2b789237f24eb2b2c1345c96be265, type: 3}
       propertyPath: lengthInSec
       value: 5
@@ -237,11 +230,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1945871885581760763, guid: 99f2b789237f24eb2b2c1345c96be265, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
-      value: 7
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1945871885581760763, guid: 99f2b789237f24eb2b2c1345c96be265, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 10
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 1945871885581760763, guid: 99f2b789237f24eb2b2c1345c96be265, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.b
