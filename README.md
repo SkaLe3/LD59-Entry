@@ -4,6 +4,10 @@ A **Ludum Dare 59 COMPO** entry on the theme: **Signal**
 
 Built in 48 hours, solo, with all assets created during the game jam
 
+<p align="center">
+  <img src="Resources/gameplay.gif" width="500"/>
+</p>
+
 ## Overview
 Cardboard Delivery Service is a signal-routing game where the player connects network towers using a delivery van. Towers cannot form connections directly — signal propagation is routed through hub towers while avoiding obstacles that block line-of-sight communication.
 
