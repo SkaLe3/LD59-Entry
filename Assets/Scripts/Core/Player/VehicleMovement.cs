@@ -1,4 +1,5 @@
 ﻿using System;
+using Service.Audio;
 using UnityEngine;
 
 namespace Core.Player
@@ -38,7 +39,6 @@ namespace Core.Player
         
         [SerializeField] private AudioSource engineSoundSource;
         [SerializeField] private AudioSource skidClip;
-        [SerializeField] private AudioClip[] impactSounds;
         [SerializeField] private float impactVolume = 1.0f;
         [SerializeField] private GameObject impactParticlesPrefab;
         [SerializeField] private GameObject carBody;
@@ -79,11 +79,6 @@ namespace Core.Player
         {
             accelerationInput = Mathf.Clamp(accelerationValue, -1f, 1f);
             steeringInput = Mathf.Clamp(steeringValue, -1f, 1f);
-        }
-
-        private void OnCollisionEnter(Collision other)
-        {
-            // TODO: Check speed and play audio. set minimum speed for activation and make volume depend on speed
         }
 
         private void Update()
@@ -219,7 +214,8 @@ namespace Core.Player
         {
             if (engineSoundSource == null) return;
             float t = rb.linearVelocity.magnitude / maxSpeed;
-            engineSoundSource.pitch = 1 + 2 * Mathf.Sqrt(t);
+            engineSoundSource.pitch = 0.6f + 1.5f * Mathf.Sqrt(t);
+            engineSoundSource.volume = Mathf.Sqrt(t) * 1.5f;
         }
         
         private void UpdateVisuals()
@@ -280,7 +276,20 @@ namespace Core.Player
 
         private void UpdateSkidMarks()
         {
-            if (Mathf.Abs(Vector3.Dot(rb.linearVelocity, transform.right)) > minSideSkidVelocity)
+            bool isSideSkidding = Mathf.Abs(Vector3.Dot(rb.linearVelocity, transform.right)) > minSideSkidVelocity;
+            
+            float forwardSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
+            bool isBrakingSkid = false;
+            
+            if (isGrounded && Mathf.Abs(forwardSpeed) > 2f) 
+            {
+                if ((forwardSpeed > 0 && accelerationInput < -0.1f) || (forwardSpeed < 0 && accelerationInput > 0.1f))
+                {
+                    isBrakingSkid = true;
+                }
+            }
+            
+            if (isSideSkidding || isBrakingSkid)
                 StartSkidEffects();
             else
                 StopSkidEffects();
@@ -323,7 +332,7 @@ namespace Core.Player
 
             if (skidClip != null)
             {
-                skidClip.Stop();
+                //skidClip.Stop();
             }
 
             tireEffectsFlag = false;
@@ -331,26 +340,38 @@ namespace Core.Player
         
         private void UpdateWheelVisuals()
         {
-            // 1. Calculate how much the wheel should have rotated based on speed
-            // We use the dot product to ensure wheels spin backward when reversing
             float speed = Vector3.Dot(rb.linearVelocity, transform.forward);
-    
-            // Formula: Distance / Circumference * 360 degrees
             float rotationAmount = (speed * Time.deltaTime) / (2 * Mathf.PI * wheelRadius) * 360f;
             wheelRotationAngle += rotationAmount;
-
-            // 2. Rotate Front Wheels (Spin + Steer)
+            
             foreach (var wheel in frontWheelMeshes)
             {
-                // Local rotation: X is rolling, Y is steering
                 wheel.transform.localRotation = Quaternion.Euler(0, steeringInput * maxSteerAngle, -wheelRotationAngle);
             }
-
-            // 3. Rotate Back Wheels (Spin only)
+            
             foreach (var wheel in backWheelMeshes)
             {
                 wheel.transform.localRotation = Quaternion.Euler(0, 0, -wheelRotationAngle);
             }
+        }
+        
+        private void OnCollisionEnter(Collision other)
+        {
+            float impactForce = other.relativeVelocity.magnitude;
+
+            
+            if (impactForce > 2f)
+            {
+                PlayHitSound(impactForce, other.contacts[0].point);
+                OnCrashed?.Invoke();
+            }
+        }
+
+        private void PlayHitSound(float force, Vector3 impactPoint)
+        {
+            float volumeScale = Mathf.Clamp01(force / maxSpeed) * impactVolume;
+            Debug.Log($"OnCollisionEnter {volumeScale}");
+            Service.Services.GetService<AudioService>().PlaySound("hit", volumeScale*volumeScale);
         }
     }
 }

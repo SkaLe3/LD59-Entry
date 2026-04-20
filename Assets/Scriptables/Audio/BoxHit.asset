@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e16dbe07cff4c81b9031888f79a2a6c, type: 3}
+  m_Name: BoxHit
+  m_EditorClassIdentifier: Assembly-CSharp::Service.Audio.SoundCue
+  clips:
+  - {fileID: 8300000, guid: 1c26cf8f7e610a24d968311b3335b3c9, type: 3}
+  - {fileID: 8300000, guid: 78a353c8466981a449ea78f59adbe89c, type: 3}
+  - {fileID: 8300000, guid: 9ab49b04dde1ac340a70c8a488043bd2, type: 3}

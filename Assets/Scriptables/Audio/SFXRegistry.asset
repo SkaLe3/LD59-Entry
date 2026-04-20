@@ -12,4 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66c659f97ba940b1907f8c0925177ab0, type: 3}
   m_Name: SFXRegistry
   m_EditorClassIdentifier: Assembly-CSharp::Service.Audio.SoundCueRegistry
-  Entries: []
+  Entries:
+  - Key: hit
+    so: {fileID: 11400000, guid: 9b768718a8036a54f859a3a7529fd76c, type: 2}
+  - Key: connect
+    so: {fileID: 11400000, guid: d589b4ddf944eea4394185680ad5fc19, type: 2}
+  - Key: disconnect
+    so: {fileID: 11400000, guid: 5bba0aa5061f10c46a1986bc665ea7ce, type: 2}
+  - Key: uiclick
+    so: {fileID: 11400000, guid: 16aa37d0a9120af479c4ac71ded08f62, type: 2}
+  - Key: uihover
+    so: {fileID: 11400000, guid: 5edba61d5a05c5b4798227f243c68273, type: 2}

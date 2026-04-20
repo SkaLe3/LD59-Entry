@@ -1,6 +1,8 @@
 ﻿using System;
 using Tools;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;

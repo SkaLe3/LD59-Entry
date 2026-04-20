@@ -2550,8 +2550,8 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
-  m_Antialiasing: 0
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -2945,7 +2945,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!114 &2217504949895180063
@@ -3019,7 +3019,6 @@ MonoBehaviour:
   maxSteerAngle: 30
   engineSoundSource: {fileID: 2610589605057346085}
   skidClip: {fileID: 3534217492301552432}
-  impactSounds: []
   impactVolume: 1
   impactParticlesPrefab: {fileID: 0}
   carBody: {fileID: 4713604073643781832}
@@ -3042,11 +3041,11 @@ AudioSource:
   m_GameObject: {fileID: 9013838769218101207}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5202290421603773881, guid: 84b16d88a33539341a1c4e6f2e54df57, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Resource: {fileID: 8300000, guid: faf9b4239cb23f44c9778a0f053a1dd2, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3139,13 +3138,13 @@ AudioSource:
   m_GameObject: {fileID: 9013838769218101207}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -5202290421603773881, guid: 84b16d88a33539341a1c4e6f2e54df57, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: 46ecf50a627aab34dadab97071a94f88, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3154,7 +3153,7 @@ AudioSource:
   MinDistance: 1
   MaxDistance: 500
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

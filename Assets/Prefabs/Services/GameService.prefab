@@ -44,3 +44,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2cbeffa93d448e3b16fde6fb1f5c1a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Service.Game.GameService
+  musicPlaylist: {fileID: 11400000, guid: 29ca172dc205a704db34532b547956fd, type: 2}

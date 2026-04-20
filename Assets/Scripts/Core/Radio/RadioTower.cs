@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Player;
+using Service.Audio;
 using Service.UI;
 using Service.UI.Windows;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking.PlayerConnection;
 using MathUtils = Math.MathUtils;
@@ -296,6 +296,7 @@ namespace Core.Radio
             {
                 _signalPlayerTarget = connectionTarget;
             } 
+            Service.Services.GetService<AudioService>().PlaySound("connect");
             connectionTarget.NotifyConnectionEstablished(this);
             TurnOffDiscovery();
             TurnOnEmitter(connectionTarget);
@@ -311,6 +312,7 @@ namespace Core.Radio
             else
             {
                 _signalPlayerTarget = null;
+                Service.Services.GetService<AudioService>().PlaySound("disconnect");
             }
             target.NotifyConnectionLost();
 
