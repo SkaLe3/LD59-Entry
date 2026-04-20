@@ -80,7 +80,7 @@ namespace Service.UI.Windows
         {
             if (towerMarkerWidgets.ContainsKey(tower))
             {
-                Destroy(towerMarkerWidgets[tower]);
+                Destroy(towerMarkerWidgets[tower].gameObject);
                 towerMarkerWidgets.Remove(tower);
             }
         }

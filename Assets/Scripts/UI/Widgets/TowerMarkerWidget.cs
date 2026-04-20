@@ -52,7 +52,7 @@ namespace UI.Widgets
 
         public void SetMarkerSize(bool isHub)
         {
-            transform.localScale = isHub ? new Vector3(0.8f, 0.8f, 0.8f) : Vector3.one;
+            transform.localScale = isHub ? new Vector3(0.7f, 0.7f, 0.7f) : Vector3.one;
         }
 
         public ETowerType GetTowerType()
