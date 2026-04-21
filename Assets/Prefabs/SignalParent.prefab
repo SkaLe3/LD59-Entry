@@ -97,6 +97,10 @@ PrefabInstance:
       value: Signal
       objectReference: {fileID: 0}
     - target: {fileID: 6548853575738416421, guid: 302d90483f2e7d24aa3296b06acec0c8, type: 3}
+      propertyPath: cullingMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548853575738416421, guid: 302d90483f2e7d24aa3296b06acec0c8, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
       value: 12
       objectReference: {fileID: 0}

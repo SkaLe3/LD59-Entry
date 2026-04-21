@@ -181,7 +181,7 @@ namespace Core.Player
             if (_interactionTower == null) return;
             
             RadioTower myTower = _connectedTower as RadioTower;
-            if (myTower && myTower != _interactionTower)
+            if (myTower && myTower != _interactionTower && _interactionTower.IsAvailableAsReceiver)
             {
                 myTower.Disconnect(this);
                 

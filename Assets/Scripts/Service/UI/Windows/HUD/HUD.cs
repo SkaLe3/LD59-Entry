@@ -114,13 +114,7 @@ namespace Service.UI.Windows
 
         public void ShowGameOverScreen(float time, int connections)
         {
-            HideConnectPrompt();
-            HideShutdownPrompt();
-            foreach (var widget in towerMarkerWidgets)
-            {
-                Destroy(widget.Value.gameObject);
-            }
-            towerMarkerWidgets.Clear();
+            Cleanup();
             
             gameOverScreen.SetActive(true);
 
@@ -132,6 +126,17 @@ namespace Service.UI.Windows
             timeText.text = string.Format("{0}:{1:00}", minutes, seconds);
         }
 
+        private void Cleanup()
+        {
+            HideConnectPrompt();
+            HideShutdownPrompt();
+            foreach (var widget in towerMarkerWidgets)
+            {
+                Destroy(widget.Value.gameObject);
+            }
+            towerMarkerWidgets.Clear();
+        }
+
         public void HideGameOverScreen()
         {
             gameOverScreen.SetActive(false);
@@ -139,6 +144,7 @@ namespace Service.UI.Windows
 
         public void MainMenu()
         {
+            Cleanup();
             Service.Services.GetService<UIService>().GetWindow<MainWindow>().HideWindow();
             HideGameOverScreen();
             
